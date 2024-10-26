@@ -111,7 +111,6 @@ local function alterguardian_spawngestalt_fn_mod(inst, owner, data)
     if owner ~= nil and (owner.components.health == nil or not owner.components.health:IsDead()) then
         local target = data.target
         if target and target ~= owner and target:IsValid() and (target.components.health == nil or not target.components.health:IsDead() and not target:HasTag("structure") and not target:HasTag("wall")) then
-
             -- In combat, this is when we're just launching a projectile, so don't spawn a gestalt yet
             if data.weapon ~= nil and data.projectile == nil
                     and (data.weapon.components.projectile ~= nil
@@ -120,16 +119,15 @@ local function alterguardian_spawngestalt_fn_mod(inst, owner, data)
                 return
             end
 
-            local x, y, z = target.Transform:GetWorldPosition()
-
-            local gestalt = SpawnPrefab("alterguardianhat_projectile")
-            local r = GetRandomMinMax(3, 5)
-            local delta_angle = GetRandomMinMax(-90, 90)
-            local angle = (owner:GetAngleToPoint(x, y, z) + delta_angle) * DEGREES
-            gestalt.Transform:SetPosition(x + r * math.cos(angle), y, z + r * -math.sin(angle))
-            gestalt:ForceFacePoint(x, y, z)
-            gestalt:SetTargetPosition(Vector3(x, y, z))
-            gestalt.components.follower:SetLeader(owner)
+    --         local x, y, z = target.Transform:GetWorldPosition()
+    --         local gestalt = SpawnPrefab("alterguardianhat_projectile")
+    --         local r = GetRandomMinMax(3, 5)
+    --         local delta_angle = GetRandomMinMax(-90, 90)
+    --         local angle = (owner:GetAngleToPoint(x, y, z) + delta_angle) * DEGREES
+    --         gestalt.Transform:SetPosition(x + r * math.cos(angle), y, z + r * -math.sin(angle))
+    --         gestalt:ForceFacePoint(x, y, z)
+    --         gestalt:SetTargetPosition(Vector3(x, y, z))
+    --         gestalt.components.follower:SetLeader(owner)
 
             if owner.components.sanity ~= nil then
                 owner.components.sanity:DoDelta(3, true)
