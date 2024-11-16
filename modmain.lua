@@ -137,6 +137,9 @@ local function alterguardian_spawngestalt_fn_mod(inst, owner, data)
 end
 
 local function mod_on_equip(inst, owner)
+    if owner.isplayer then
+        owner:AddCameraExtraDistance(inst, TUNING.SCRAP_MONOCLE_EXTRA_VIEW_DIST)
+    end
 	inst.alterguardian_spawngestalt_fn_mod = function(_owner, _data)
 		alterguardian_spawngestalt_fn_mod(inst, _owner, _data)
 	end
@@ -144,6 +147,9 @@ local function mod_on_equip(inst, owner)
 end
 
 local function mod_on_unequip(inst, owner)
+    if owner.isplayer then
+        owner:RemoveCameraExtraDistance(inst)
+    end
 	inst:RemoveEventCallback("onattackother", inst.alterguardian_spawngestalt_fn_mod, owner)
 end
 
